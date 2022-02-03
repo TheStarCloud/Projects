@@ -1,6 +1,11 @@
 # Employee Turnover Power BI Project
 This was my first independent project in which I practiced with Power BI.  
 The biggest part of this project for me was tidying and wrangling the data before creating the visualizations.
+This involved: 
+ - checking column quality, distributions, and profiles to check for errors/null values/duplicates
+ - renaming columns to be more descriptive
+ - cleaning up data to be a better fit with datatypes and more descriptive conventions
+
 
 After that, I was looking at the stats for gender differences in the data, and whether having the gender of an employee's supervisor match that of the employee made a difference in whether there was turnover.  As it turns out, this did not have a significant impact on turnover.
 The data source also included data on how employees rated in different categories of a personality matrix test, so I was interested to see if different aspects of an employee's personality had an impact on turnover; there wasn't much of a significant impact here either.
