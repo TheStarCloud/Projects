@@ -9,7 +9,10 @@ The data set I used contained:
 - the price per pound of honey
 - the value of the honey production (calculated as total production * price per pound) in USD
 
-for each state, for each year from 1998 - 2012. It contained 8 columns and 626 rows.  The data was [sourced from Kaggle](https://www.kaggle.com/jessicali9530/honey-production). 
+for each state, for each year from 1998 - 2012. It contained 8 columns and 626 rows.  The data was [sourced from Kaggle](https://www.kaggle.com/jessicali9530/honey-production).
+
+#### Honey Production in Top 5 States
+![top5states.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/top5states.png?raw=true "Honey production in top 5 states")
 
 ### Single Linear Regressions
 To see trends in bee populations and honey production, I created linear regression models, and used them to predict when each metric might reach zero if the shown trend were to continue.
@@ -73,3 +76,30 @@ for state_n in states:
 ![NCprodgrowth.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/NCprodgrowth.png?raw=true "Honey production growth in North Carolina")
 ![NDprodgrowth.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/NDprodgrowth.png?raw=true "Honey production growth in North Dakota")
 ![NJprodgrowth.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/NJprodgrowth.png?raw=true "Honey production growth in New Jersey")
+
+I then found the top 5 states with best average increase in honey production per year, and the 5 states with the worst decline.  
+5 States with the best growth in Honey Production (average increase in lbs per year):  
+state: growth  
+ND:  664928.57  
+MS:   41400  
+NC:   11257.14  
+KY:    2157.14  
+NJ:     696.43  
+
+5 States with the worst decline in Honey Production (average decrease in lbs per year):  
+state:        growth  
+WI: -261846.4  
+MN: -316767.9  
+SD: -417021.4  
+FL: -995650.0  
+CA: -1335000.0  
+
+I then tried my hand at creating a choropleth map for the first time - to map out the growth/decline of Honey Production by state to see if there were any regional trends.  While I can only include a PNG file here, if you run the actual ipynb file of the script, the map is interactable - you can zoom in and out, and mouse over individual states to see their abbreviated names and average yearly growth.  
+![growthmap.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/growthmap.png?raw=true "Honey production growth by state")  
+As you can see, North Dakota is the only state with *noticeably* significant growth.  Meanwhile, California and Florida had the most drastic declines (even though, as shown in the first graphic, they are among the highest producing states).
+
+### Multiple Linear Regression to predict Honey Prices
+Using the number of colonies, honey yield per colony, total honey produced, honey stocks, and the year as features, I created a Multiple Linear Regression model to predict honey prices.  
+This model had a residual analysis score of 0.586 for the training set, and 0.487 for the test set.  So only a moderate correlation.  It offers predictions based on general trends, but not terribly accurate.  Ideally, I would love to have more data features to work with that could impact honey prices, such as inflation rate or any other relavent data.  
+![price_pred_accuracies.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/price_pred_accuracies.png?raw=true "MLR Prediction Accuracy")  
+The strongest predictors out of the features I had were a positive correlation with year, and a negative correlation with honey yield per colony.
