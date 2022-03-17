@@ -54,23 +54,7 @@ The predicted average price for honey in 2022 is $3.18 per pound.
 
 ### Looking for Growth
 With overall trends showing bee populations and honey production worryingly decreasing, I wanted to see which states (if any) saw growth in this time, so that possible solutions could be modeled after them.  To do this I looked for states that had a positive rate of change in their trend line for total production, and then created plots to show their honey production over the years.
-```
-linear_growth_rate = []
-for state_n in states:
-    y = df.loc[df['state']== state_n]['totalprod']
-    if len(X) == len(y):
-        m, b = np.polyfit(X, y, 1)
-        linear_growth_rate.append([state_n, m])
-        if m > 0:
-            plt.plot(X, y)
-            plt.title(state_n + " Honey Production Growth")
-            plt.xlabel("Year")
-            plt.ylabel("Honey Production (lbs)")
-            plt.tight_layout()
-            plt.savefig('images/'+state_n + "prodgrowth.png")
-            plt.show()
-            plt.clf()
-```
+
 ![KYprodgrowth.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/KYprodgrowth.png?raw=true "Honey production growth in Kentucky")
 ![MSprodgrowth.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/MSprodgrowth.png?raw=true "Honey production growth in Mississippi")
 ![NCprodgrowth.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/NCprodgrowth.png?raw=true "Honey production growth in North Carolina")
@@ -103,3 +87,9 @@ Using the number of colonies, honey yield per colony, total honey produced, hone
 This model had a residual analysis score of 0.586 for the training set, and 0.487 for the test set.  So only a moderate correlation.  It offers predictions based on general trends, but not terribly accurate.  Ideally, I would love to have more data features to work with that could impact honey prices, such as inflation rate or any other relavent data.  
 ![price_pred_accuracies.png](https://github.com/TheStarCloud/Projects/blob/main/HoneyProduction%20LinRegr/images/price_pred_accuracies.png?raw=true "MLR Prediction Accuracy")  
 The strongest predictors out of the features I had were a positive correlation with year, and a negative correlation with honey yield per colony.
+
+### Other Thoughts
+After creating the single regression models, I was honestly surprised by how much faster the decline of honey production seemed to be than the decline of honeybee colonies.  Why would we run out of honey so much faster than bees?  I decided to dig into some outside research, and found out that while most animals can grow their population exponentially, bee colonies can only grow their population _linearly_, because each colony has only one queen that can produce offspring.  And even this linear growth will taper off once the colony reaches a maximum capacity [source](https://scientificbeekeeping.com/understanding-colony-buildup-and-decline-part-4/).  
+To sustain colony numbers, beekeepers split colonies once they reach a certain size.  But each time colonies are split, honey production slows down for each new, smaller colony since they have fewer troops.  This could explain why the model shows us running out of honey much faster than running out of colonies.  Realistically, the amount of honey would likely taper off near the end rather than hitting zero in a strictly linear fashion.
+
+It is also worth noting that the data used in this project only ranges from 1998 - 2012.  Since this colony collapse syndrome has been discovered by scientists, considerable efforst have been made to restabalize bee populations, and have been largeley successful.  [In 2017, honeybee colony loss hit its lowest point in years](https://www.washingtonpost.com/news/wonk/wp/2015/07/23/call-off-the-bee-pocalypse-u-s-honeybee-colonies-hit-a-20-year-high/).  While we need to continue these efforts to keep honeybee populations stable, the reality is no longer as bleak as it was from the observations that these models were built on.
