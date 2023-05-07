@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>CPM Calculator</title>
+  </head>
+  <body>
+    <form method="POST" action="{{ url_for('calculate') }}">
+      <label>Impressions:</label>
+      <input type="text" name="impressions"><br>
+      <label>Media Cost:</label>
+      <input type="text" name="media_cost"><br>
+      <input type="submit" value="Calculate">
+    </form>
+
+    {% if cpm is not none %}
+      <p>The CPM is {{ cpm }}.</p>
+    {% endif %}
+  </body>
+</html>
